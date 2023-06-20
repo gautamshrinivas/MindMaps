@@ -1,7 +1,7 @@
-# terraform.
+# Terraform
 
-* for deploying application we need infrastructure
-* by using this terraform we can create infrastucture
+* for deploying applications we need infrastructure
+* by using this terraform we can create infrastructure
 * Infrastructure as Code (IaC)
 * This means expressing our infra needs in the form of some template.
 * While creating/realizing the infra, pass the dynamic values. 
@@ -10,17 +10,17 @@
   * Define our infrastructure as a template in Terraform   
   * Execute the template to create infrastructure.
 * we need to write these templates in Hashicorp Configuration Language (HCL)
-* Here we express what we want in the template which is referred as Desired State
-* Now when execute terraform will try to create infra to match your Desired State.
+* Here we express what we want in the template which is referred to as Desired State
+* Now when executing terraform will try to create infra to match your Desired State.
 ## Immutable infrastructure:
 ------------------------------
-*  The approach we are following is immutable infrastructure. Any change in infrastructure can happen by the changes in the template. Every change is stored in version control system i.e. we have history of all the changes.
+*  The approach we are following is immutable infrastructure. Any change in infrastructure can happen through the changes in the template. Every change is stored in the version control system i.e. we have a history of all the changes.
 * 
 * ### Idempotence: 
-  * This is property which states that executing once or multiple times will have the same result
+  * This is a property that states that executing once or multiple times will have the same result
 
 * ## Provider: 
-* Provider: Provider tells terraform where do you want to create the infra, Generally there will be   authentication details as well.
+* Provider: Provider tells Terraform where do you want to create the infra, Generally there will be   authentication details as well.
 
 * **ex**
 -------- 
@@ -34,7 +34,7 @@ provider "aws" {
 
 * ## Resource 
 
-* The infra component which we want to create, while creating resouce we need to pass some arguments
+* The infra component which we want to create, while creating resources we need to pass some arguments
 ```
 resource "<type-of-resource>" "<name for reference in tf tempalte>" {
     argument_1 = "value_1"
@@ -44,7 +44,7 @@ resource "<type-of-resource>" "<name for reference in tf tempalte>" {
 
 }
 ```
-**example:**
+**Example:**
 
 ```
 resource "aws_s3_bucket" "first_bucket"  {
@@ -55,31 +55,31 @@ resource "aws_s3_bucket" "first_bucket"  {
 ## terraform configration with aws
 -----------------------------------
 * While configuring Provider, Authentication has to be configured
-* for this configuration we need access-key and secrect-key for that we have to create iam user.
+* for this configuration we need an access key and a secret key for that we have to create an IAM user.
 
 ## working with terraform
 -------------------------
-* For working with terrafom open terminal ,  create a folder cd into folder where we have terraform templates.
-(template should be in .tf extention.)
+* For working with Terraform open terminal,  create a folder cd into the folder where we have Terraform templates.
+(template should be in .tf extension.)
 
 ## init  
 ----------
-*  Downloads the necessary providers into `.terraform` folder
+*  Downloads the necessary providers into the `.terraform` folder
 * \.terraform\providers\registry.terraform.io\hashicorp\aws\4.55.0\windows_amd64
 
 ## validate
 ------------
-* validate => verify the template for configuration being valid or not.
+* validate => verify the template for the configuration is valid or not.
 
 ## apply
 --------
 * apply => creates/updates the infrastructure
-## destory
+## destroy
 --------
 * it will delete the created resources
 ## plan
 ------
-it will give the plan of our infrastructure
+it will give the plan for our infrastructure
 but not created
 ## terraform fmt
 ----------------
@@ -105,12 +105,12 @@ resource "aws_s3_bucket" "first_bucket"  {
     }
 }
 ```
-* **Terraform after creation of resources will create a state file with the details of the resources created in the same folder where we have templates defined. The filename is terraoform.tfstate. Please dont mess with this file.**
+* **Terraform after the creation of resources will create a state file with the details of the resources created in the same folder where we have templates defined. The filename is terraform.tfstate. Please don't mess with this file.**
 ## Variables 
 ------------
-* in templates we have directly specified the configuration as part of resource, so the template will not be flexible . it will try to create resources with same configuration all the time.
-* We need flexbility where the user should have option to pass/change the values while creating infrastructure.
-* This can be acheived by using variables in terraform
+* in templates we have directly specified the configuration as part of the resource, so the template will not be flexible. it will try to create resources with the same configuration all the time.
+* We need flexibility where the user should have the option to pass/change the values while creating infrastructure.
+* This can be achieved by using variables in Terraform
 ```
 variable "<name-of-variable>" {
     type = "<type of variable>"
@@ -120,12 +120,12 @@ variable "<name-of-variable>" {
 ```
 * [refer here](https://developer.hashicorp.com/terraform/language/values/variables#arguments) for varible arguments.
 
-* simple types are string, number and bool
-* pass the variables from command line
+* simple types are string, number, and bool
+* pass the variables from the command line
 * terraform apply -var="target_region=us-west-2" -var="vpc_range=192.168.0.0/16" -auto-approve
 ## to create vpc with variables
 -----------------
-* Passing all the variable values from commandline is not sensible, so lets assign values to all the variables in .tfvars file
+* Passing all the variable values from the command line is not sensible, so let's assign values to all the variables in the .tfvars file
 * [referhere](https://github.com/asquarezone/TerraformZone/commit/ef7a3b6cb4f2bc61a0caa609f81aaa17611d9450#diff-607f380d33f20b3827cadabe4c5cd596c7f0bf9a748eb043f43faca39f7816b4)
 
 * and apply `terraform apply -var-file ".\dev.tfvars" -auto-approve`
@@ -133,12 +133,12 @@ variable "<name-of-variable>" {
 ## Terraform order of Creation
 ------------------------------
 * ![priview](./images/tf38.webp)
-* Inputs to a resource is argument and output of a resource is attribute
+* Inputs to a resource is argument and the output of a resource is an attribute
 * To use attribute `resource_type.resource_name.<attribute>`
 * ### **Implicit Dependency:**
-* using attributes of one resource as input i.e arguments to other resource will create implicit . [refer](https://github.com/asquarezone/TerraformZone/commit/a02df5c02a4b1f8207bd6a8fd9160f6d682e3570) for the example
+* using attributes of one resource as input i.e. arguments to other resource will create implicit. [refer](https://github.com/asquarezone/TerraformZone/commit/a02df5c02a4b1f8207bd6a8fd9160f6d682e3570) for the example
 * ### **Explicit dependencies**
-* by using explicit dependencies we can control order of creration. by using dependson [refer](https://github.com/asquarezone/TerraformZone/commit/74d15ccc55fc2163f09d263e5c189c617ddbf679) for example.
+* by using explicit dependencies we can control the order of creation. by using depends on [refer](https://github.com/asquarezone/TerraformZone/commit/74d15ccc55fc2163f09d263e5c189c617ddbf679) for example.
 ## count 
 --------
 * If there is a way to write loops it would simplify the resource creation.
@@ -180,7 +180,7 @@ resource "aws_instance" "example" {
   }
 }
 ```
-## To use provider with specific version
+## To use a provider with a specific version
 --------------------------------------
 * Every provider will have many versions to use a specific version of the provider an additional syntax is required
 * **example**
@@ -200,7 +200,7 @@ provider "aws" {
 }
 ```
 
-* The `~>` symbol means "compatible with" this means
+* The `~>` symbol means "compatible with" This means
 * Specifically, version = "~> 4.0" means that the provider is compatible with any version that is greater than or equal to version 4.0, but less than version 5.0.
 ## Using count to create multiple subnets in AWS for ntier-architecture
 ----------------------------------------------
@@ -308,14 +308,14 @@ resource "aws_subnet" "subnets" {
 * ### steps to enable debug logs in Terraform
 * Set the TF_LOG environment variable to debug by running the following command:   
 * Linux and macOS users-->`export TF_LOG=debug`
-* windows users--> `set TF_LOG=debug`
-## disable debug logs in terraform
+* Windows users--> `set TF_LOG=debug`
+## Disable debug logs in terraform
 ----------------------------------
 * linux and macos users--> `unset TF_LOG`
 * for windows--> `set TF_LOG=`
 
 ## **output**-->
-*  "output" is a way to declare a value that should be made available to the user after a successful Terraform apply operation.
+*  "Output" is a way to declare a value that should be made available to the user after a successful Terraform apply operation.
 ```
 * **ex** 
 output "vnetid" {
@@ -326,18 +326,18 @@ output "subnetcount" {
 
 ## modules.
 -----------
-* Reusability is essential as we follow principle DRY (Dont Repeat Yourself)
+* Reusability is essential as we follow the principle DRY (Dont Repeat Yourself)
 * In Terraform, if we need reusability we need to create modules.
-* Terraform has lot of modules developed by communities and terraform stores them in terraform registry 
+* Terraform has a lot of modules developed by communities and terraform stores them in terraform registry 
 ## creation
 * Create a directory for the module, and create a file named main.tf inside it.
 * Write your Terraform configuration for the module in the main.tf file.
-* Optionally, create other files and directories to organize your module's configuration. For example, you may want to create a variables.tf file to define input variables for the module, or a outputs.tf file to define output values.
+* Optionally, create other files and directories to organize your module's configuration. For example, you may want to create a variables.tf file to define input variables for the module or outputs.tf file to define output values.
 * Optionally, create a README.md file to document how to use the module
 * Publish the module to a module registry, such as the Terraform Registry, so that it can be easily shared and used by others.
 * [refere](https://developer.hashicorp.com/terraform/language/modules/sources) for other sources.
 ![refer](./images/1.png)
-### Lets use terraform aws-vpc module to create 6 subnets
+### Let's use terraform aws-vpc module to create 6 subnets
 ------------------
 [refer](https://github.com/asquarezone/TerraformZone/commit/5550f47e9d0ced7b05ce16dd5e308b3da0af4222) 
 
@@ -353,7 +353,7 @@ data "aws_instance" "example" {
 output "instance_private_ip" {
   value = data.aws_instance.example.private_ip
 
-*example is used to pull the defult vpc id of mumbai region and subnetids of any vpc from az ap-south-1a*
+*example is used to pull the default vpc id of Mumbai region and subnetids of any vpc from az ap-south-1a*
 
 data "aws_vpc" "default" {
     default = true
@@ -365,7 +365,7 @@ data "aws_subnets" "subnetids" {
       values = [ "ap-south-1a" ]
     }
 ```
-## security group
+## Security group
 -------------
 ```
 resource "aws_security_group" "rds_sg" {
@@ -386,7 +386,7 @@ resource "aws_security_group" "rds_sg" {
       "Name" = "openmysql"
     }
 ```
-## db-subnet group and db-instence
+## db-subnet group and db-instance
 ----------------------------------
 ```
 # dbsubnet group
@@ -417,7 +417,7 @@ resource "aws_db_instance" "default" {
   db_subnet_group_name = aws_db_subnet_group.mysqldbsubnetgroup.name
 }
 ```
-* any doubts about above [refer](https://directdevops.blog/2022/10/26/devops-classroomnotes-26-oct-2022/)
+* any doubts about the above [refer](https://directdevops.blog/2022/10/26/devops-classroomnotes-26-oct-2022/)
 ## db-subnet-group
 ------------------
 * In Terraform, aws_db_subnet_group is a resource type that creates a subnet group for a specific Amazon Web Services (AWS) database instance. The subnet group specifies the subnets that the database instance can use in a particular Virtual Private Cloud (VPC).
@@ -435,7 +435,7 @@ resource "aws_db_subnet_group" "example" {
 * In Terraform we have options to taint
 * **Taint**: During next apply delete and recreate the resource
 * syntax for taint is `terraform taint <resource_type>.<resource_name>`
-* To unmark a resource tainted for replacement we can untaint before next terraform appply to undo the taint.
+* To unmark a resource tainted for replacement we can untaint before the next terraform apply to undo the taint.
 `terraform taint <resource_type>.<resource_name>`
 * if you accidentally taint a critical resource, it could result in downtime or data loss. It's recommended to use this command only when necessary and with a clear understanding of the potential impacts.
 
@@ -490,7 +490,7 @@ resource "aws_instance" "webec2" {
   * local-exec: 
   * remote-exec:
   * file
-* To connect to the remote instance we need connection
+* To connect to the remote instance we need a connection
 ```
 resource "aws_instance" "webec2" {
     ami = var.ami-id
@@ -528,11 +528,11 @@ resource "aws_instance" "webec2" {
 }
 ```
 * Terraform provisioner will be run only when the resource is created.
-* Lets make changes in remote-exec inline Refer Here and try to perform terraform apply. Terraform will not consider the changes in remote-exec as desired state, so nothing will be executed.
+* Let's make changes in remote-exec inline Refer Here and try to perform terraform apply. Terraform will not consider the changes in remote-exec as desired state, so nothing will be executed.
 * Provisoner without a resource can be used to solve this problem
 ## null resource
 ----------------
-* In the null resource create a triggers which maps to certain input from the user which triggers script execution
+* In the null resource create a trigger that maps to certain input from the user which triggers script execution
 ```
 resource "null_resource" "webprovisoner" {
   triggers = {
@@ -560,15 +560,15 @@ resource "null_resource" "webprovisoner" {
 ```
 ## Terraform backend s3
 ------------------------
-* As of now the terraform state is maintained in the local folder. when we try to execute the same infra from different system it also generates a new state file which means new resources will be provisioned again.
+* As of now the terraform state is maintained in the local folder. when we try to execute the same infra from a different system it also generates a new state file which means new resources will be provisioned again.
 * solution for this is provided by terraform backends
-* Backend is location where your state file gets stored.
-* Default backend is local. This is the reason why .tfstate is shown in local folder where we have templates.
+* Backend is a location where your state file gets stored.
+* Default backend is local. This is the reason why .tfstate is shown in the local folder where we have templates.
 
 ## Terraform backend s3
 -----------------------
 * The state file gets stored in aws s3.
-* But terraform s3 backend doesnot support locking. 
+* But terraform s3 backend does not support locking. 
 * To perform locking terraform expects a dynamo db table to be created
 * for docs [refe](https://developer.hashicorp.com/terraform/language/settings/backends/s3)
 ```
@@ -585,10 +585,10 @@ terraform {
 * * After adding backend information execute terraform init
 ## Terraform Workspaces
 -----------------------
-* Terraform workspaces allows us to create locking per workspace.
+* Terraform workspaces allow us to create locking per workspace.
 * Each workspace can be considered as one environment
 * ![priview](./images/workspace-1.webp)
-* Create multiple workspaces depending on environments
+* Create multiple workspaces depending on the environments
 ```
 resource "aws_instance" "example" {
   count = "${terraform.workspace == "default" ? 5 : 1}"
@@ -596,7 +596,7 @@ resource "aws_instance" "example" {
   # ... other arguments
 }
 ```
-## create a mysql database using terraform in aws
+## Create a MySQL database using terraform in aws
 ---------------------------------------------
 ```
 *# Provider configuration for AWS
@@ -630,7 +630,7 @@ resource "aws_db_instance" "example_mysql" {
   vpc_security_group_ids = [aws_security_group.mysql.id]
 }
 ```
-## How to use multiple providers with same name
+## How to use multiple providers with the same name
 -------------------------------------------
 ```
 #network.tf
@@ -660,7 +660,7 @@ output "secondaryvpcid" {
 }
 #provider.tf
 ------------
-erraform {
+terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -707,7 +707,7 @@ resource "aws_instance" "example" {
 * The `content` block defines the configuration of each network interface, using the `subnet_id` attribute to set the value of the subnet ID for each interface.
 
 
-## screts
+## secrets
 * awscl-->.aws-->credentioals-->in that we can mention
 * export acsesskey ans secreat key as a everonmental variables.
 * terraform vult.
@@ -720,12 +720,12 @@ resource "aws_instance" "example" {
 import resources
 ----------------
 ** `terraform import <resource type> <resource-name> id `
-* we have to create an empty block git creadintioal to on that
-* next do inti and plan and aply
+* we have to create an empty block git credential to on that
+* next do inti and plan and apply
 
 * we get those resources into .state file
-* we can re construct the terraform body(code)
+* we can re-construct the terraform body(code)
 
-userdata
+user data
 ---------
 * user_data = `"${file("coammands.sh")}"`
