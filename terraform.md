@@ -717,14 +717,43 @@ resource "aws_instance" "example" {
 * `<tfenv install'thatparticularversion>`
 * we can switch `tfevn use <version> `
 
-import resources
+## import resources
 ----------------
 ** `terraform import <resource type> <resource-name> id `
-* we have to create an empty block git credential to on that
-* next do inti and plan and apply
+** `terraform import aws_s3_bucket.my_bucket my-bucket-name  `
+* Terraform import is used when we want to match our terraform code to our aws resources, like if i have created aws instance manually then again i want to my terraform code to have that aws instance resource i can use terraform import it will import the resource and later i can fill the required details in the instance resouce body as i already know the instance id and all those things and then i can apply it.
 
-* we get those resources into .state file
-* we can re-construct the terraform body(code)
+## Terraform LifeCycle 
+----------------------
+* Lifecycle is a nested block that can appear within a resource block. The lifecycle block and its contents are meta-arguments, available for all resource blocks regardless of type.
+* The arguments available within a lifecycle block are `create_before_destroy `, `prevent_destroy `, `ignore_changes `, and `replace_triggered_by `.
+```
+resource "aws_instance" "example" {
+  # ...
+
+  lifecycle {
+    create_before_destroy = true
+    prevent_destroy       = true
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+    replace_triggered_by = [
+      # Replace `aws_instance` each time this instance of
+      # the `aws_ecs_service` is replaced.
+      aws_ecs_service.svc.id
+    ]
+  }
+}
+```
+* `create_before_destroy `: This attribute determines whether Terraform should create a new resource before destroying the old one during an update. Terraform will create a new instance before destroying the old one. This can help ensure high availability during updates.
+* `prevent_destroy `: This attribute determines whether the resource can be destroyed by Terraform. This can be useful when you want to prevent accidental deletions or ensure that certain resources are not destroyed.
+* `ignore_changes `: This argument is used within a resource block to specify which resource attributes should be ignored when detecting changes. By ignoring specific attribute changes, you can prevent Terraform from attempting to update or recreate the resource in response to those changes.
+  
+
+
+
 
 user data
 ---------
