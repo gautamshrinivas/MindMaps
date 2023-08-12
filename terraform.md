@@ -758,3 +758,4 @@ resource "aws_instance" "example" {
 User data
 ---------
 * user_data = `"${file("coammands.sh")}"`
+
