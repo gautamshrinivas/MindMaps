@@ -1,0 +1,310 @@
+how we connect 2 vm via private connection
+ how to reduce billing in aws
+ how can i move trawffic to other server when existing server is down
+ what is nacl
+ what id public and private subnet
+ how can we secure our vm
+ what would i do if i my vm is down in one region
+
+ansible secret how can we store
+how can i run particular tasks only
+how can manage loops in ansible
+how can i manage if many pods are creating 
+how can i scale in kubenertes dynamically
+how can provision persitance in kubenertes
+how can i maintaain secret in kubenertes
+how can i see the logs in elk of kubenertes
+how to make a pod delay 
+how can i use one volume to all containers
+how can i maitain secret in docker
+where can i see logs
+what to do when tf state gets deleted
+why we use null resource
+how to get slack notification
+how to build on stage at one server and other at one server
+how to login into our linux
+jenkins master slave concept
+ALB types and what is internal and intenet LB
+how to check what is the ip of the container
+how to check which pods are not running
+how to check which app is running on which port
+
+what is quality gate
+do you know about fority
+why we use trace route
+
+linux:
+------------
+how to grep a word from a list of files which we don't know ("grep -nr stringtobsearched[word] /path/of/direcoty")
+how to grep a sentence which starts from abc which is available in 10 lines in the starting out of 100 lines ("grep '^app' /path/to/directory/* -r -n")
+how to block ip address in linux (iptables is preinstalled in linux so use this command sudo iptables -I INPUT -s xxx.xxx.xxx.xxx -j DROP and sudo service iptables sav and sudo iptables -L)
+To explore the storage status we use  df -h & lsblk
+What are the https response status codes? (https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+ans: 
+    Informational responses (100 – 199)
+    Successful responses (200 – 299)
+    Redirection messages (300 – 399)
+    Client error responses (400 – 499)
+    Server error responses (500 – 599)
+
+
+docker:
+--------
+have u installed docker on any server
+ques:what is the daemon set called for docker?
+ans:The Docker daemon persists all data in a single directory. This tracks everything related to Docker, including containers, images, volumes, service definition, and secrets. By default this directory is: /var/lib/docker on Linux.
+
+ques:how do we start docker service?
+ans: sudo systemctl start docker, sudo service docker start
+
+que:how to create a network in docker and i want to communicate with 2 containers in different host
+ans: in k8's we don't need to specify the network but coming to docker we require docker swarm for this situation we have to initialize docker swarm on host1 and join the host2 to the swarm with token and create an overlay network (docker exec container1 curl http://container2)
+
+how to make our local port running and in browser other port same container
+i have 4 containers 1 is dependent on 4and 3 is dependent on 2 how can we do this
+
+que:we want to include few libraries in docker file which are given by developer how can we do
+ans: we can use COPY instruction as we can copy that libraries from local to docker file
+
+ques:how to do unit tests in docker file
+ans: in java it is not reuired because when we do mvn clean there only it will run unit tests which are associated or incase of python we can run in cmd pytest which are available in requirements.txt
+
+ques: where will you mention that you container should run on that port in the browser and in the localhost
+
+shell:
+---------
+how to write a script to search files
+
+
+k8's
+----------------
+what will u do if you get image pull back error?
+Ans: check all cases whether connectivity issue, tag name registry changed for solving check events of pod and fix them 
+
+in which cases crashloopback occurs
+what will happen if container run time is down in one of the node
+what will happen if etcd is down
+what will you do if application is running well in docker but pod is completed and getting crashloopback error
+tell me the steps that you have phython code make it deploy in k8's
+how to restart pod
+why we install ssl/tls certificates in k8's
+
+ansible:
+----------
+what are the ansible variables
+how to compare two files in ansible
+i have to print a=10 in anisble in my main.yaml file how can i do
+write an yaml file which gets the docker image from registry
+
+terraform:
+-----------
+statefile is deleted what will happen if we enter terraform apply
+what is input/output variables in terraform
+how will create s3 bucket using terraform and share the details to developer
+how will create RDS and give access to developer
+
+
+git:
+----
+if we have pulled code 10 days back we have worked locall with our brach and then we tried to push but it is giving error what will u do
+
+AWS interview questions:
+-------------------------
+How to recover lost pem key?
+ans: We can connect in two ways 1. You can login to aws console and click on ec2 instance connect it will connect through browser. 2. We can create a ami of the instance and then launch that instance from ami image while doing that create a new pem key and delete the old instance. We can do this from aws cli also.
+
+What does system status check failure mean?
+
+What does instance status check failure mean?
+
+AWS INTERVIEW QUESTIONS
+
+➡️ 𝐀𝐦𝐚𝐳𝐨𝐧 𝐄𝐂2: 
+
+🟢 What is the difference between EC2 and traditional virtualization?
+🟢 Explain the concept of Elastic Load Balancing and how it works with EC2 instances
+🟢 How can you encrypt EBS volumes?
+🟢 What is Amazon EC2 Container Service, and how does it work?
+🟢 How do you create a custom AMI, and when would you need to do so?
+🟢 Explain the concept of EC2 instance metadata?(curl http://169.254.169.254/latest/meta-data/instance-id)
+🟢 How can you deploy a multi-tier architecture on EC2 instances?
+🟢 What is an EC2 Placement Group, and when would you use it?
+🟢 How can you automate EC2 instance launches using AWS CLI or SDKs?
+🟢 Explain the differences between horizontal and vertical scaling in the context of EC2?
+Horizontal scaling involves adding more instances to your application to handle increased load.
+🟢 How do you troubleshoot an unresponsive EC2 instance?
+
+➡️ 𝐀𝐖𝐒 𝐋𝐚𝐦𝐛𝐝𝐚:
+
+🟢 What is the maximum execution time for a Lambda function, and how can you extend it?
+🟢 Explain the concept of Cold Start in AWS Lambda and how to mitigate it
+🟢 How does AWS Lambda handle asynchronous event processing?
+🟢 What is the AWS Lambda Execution Environment?
+🟢 Explain the concept of Dead Letter Queues in AWS Lambda
+🟢 How can you share code between multiple Lambda functions?
+🟢 What are the considerations for securing environment variables in Lambda functions?
+🟢 How can you integrate AWS Lambda with other AWS services?
+🟢 What is the difference between Provisioned Concurrency and On-demand Concurrency in Lambda?
+🟢 Explain the limitations of AWS Lambda
+🟢 How can you monitor and log AWS Lambda function execution?
+
+➡️ 𝐀𝐦𝐚𝐳𝐨𝐧 𝐒3:
+
+🟢 What is the maximum size of an S3 object, and how can you store larger files?
+🟢 Explain the concept of eventual consistency in S3
+🟢 How does S3 handle versioning conflicts?
+🟢 What is the difference between S3 Transfer Acceleration and Direct Connect?
+🟢 How can you enable Cross-Origin Resource Sharing (CORS) for an S3 bucket?
+🟢 What is the significance of the S3 Inventory feature?
+🟢 Explain the use cases for S3 Transfer Acceleration
+🟢 How can you enforce encryption for data at rest in an S3 bucket?
+🟢 What is the AWS Snowball service, and when would you use it for data transfer?
+🟢 How do you implement data lifecycle policies in S3?
+
+➡️ 𝐀𝐦𝐚𝐳𝐨𝐧 𝐃𝐲𝐧𝐚𝐦𝐨𝐃𝐁:
+
+🟢 Explain the differences between DynamoDB and Apache Cassandra.
+🟢 What is the difference between DynamoDB Local and the actual DynamoDB service?
+🟢 How can you implement fine-grained access control for DynamoDB tables?
+🟢 Explain the concept of adaptive capacity in DynamoDB
+🟢 What is the importance of partition key design in DynamoDB?
+🟢 How do you handle hot partitions in DynamoDB?
+🟢 Explain the differences between DynamoDB Streams and Cross-Region Replication
+🟢 What is the difference between a scan and query operation in DynamoDB?
+🟢 How do you implement global secondary indexes in DynamoDB?
+🟢 What is DAX (DynamoDB Accelerator) and how does it improve DynamoDB performance?
+🟢 Explain the considerations for backups and restores in DynamoDB
+
+1) Have you worked on Linux?
+2) what are the linux flavors?
+3) what is process management?
+4) How to create a User? and How to give permissions to the user.
+5) How do add a user to an Existing Group In Linux?
+6) How to Change the owner permissions of the User or the file?
+7) How to check the disk space in Linux?
+A) df -h and for specific folder "df -h /dev/sda1"
+8) How to check memory in Linux?
+A) free -h    and for detailed we can use "free -h | grep -i mem | awk '{print "Total: "$2", Used: "$3}'"
+9) what does the top command Display?
+A) The top command in Linux is used to display real-time information about system resources and processes. When you run the top command, it displays a dynamic, continuously updated view of system information.
+10) what is the use of lsblk command in Linux?
+A) The lsblk command in Linux is used to list information about all available block devices, such as hard drives, SSDs, and their partitions.
+11) How to do Disk partition in Ubuntu?
+12) where is fstab in Linux?
+A) The /etc/fstab file is typically used to define mount points.
+13) what is the linux boot process?
+14) what is a linux filesystem? and what is /etc and /bin?
+15) what are Crontab and Cronjob?
+16) what is virtualization?
+17) what is SElinux?
+18) How DNS works?
+19) what is Apache?
+20) What is PHPAdmin?
+21) Do you know about firewalls?
+22) what is an SSL certificate? How we can create the SSL certificate and where we will do the configurations in apache for the SSL certificate?
+23) which is better apache or Nginx? for the higher load which webserver is best?
+24) what is the path of apache configuration files?
+25) what is Cloud Computing?
+26) what is AWS?
+27) what is EC2?
+28) How we can configure the EC2 instance?
+29) What is AMI?
+30) How we can choose which instance type is required?
+31) From where can we enable termination protection in EC2?
+32) Suppose we have to install Ubuntu then where do we have to define OS while launching the EC2 instance?
+33) what is .pem?
+34) if we stop the ec2 instance then is the Private IP will change? or Not?
+35) Can you explain about inbound rules of the default security group?
+36) what is the Use of public and private IP?
+37) what is a Security Group?
+38) security Group is stateful How?
+39) what is VPC?
+40) what is CIDR?
+41) what is Subnetting?
+42) what is an internet gateway?
+43) what is Nat and why do we use nat gateway?
+44) what is Elastic IP?
+45) Tell me about VPC peering.
+46) what is S3?
+47) what is Cloudtrail?
+48) what is Cloudfront?
+49) what is blue/green deployment?
+50) what is Cloudformation and terraform?
+51) what is Elastic beanstalk?
+52) what is RDS? Is there a need to worry about backups?
+53) what is Autoscaling and How many types of autoscaling policies?
+54) what is Loadbalancer?
+55) What is the difference between ALB and ELB?
+56) what is PAAS?
+57) Suppose you are working in a new company and you don’t know how to work on new projects for the new company then which approach you will follow?
+58) what is ACM?
+59) what is shell scripting? How do we use the script for Automation?
+60) what is MySQL? How many ways we can use to take backup?
+
+-----------------------------------------------------------------------------------------------------
+𝟏: 𝐇𝐀𝐑𝐃𝐖𝐀𝐑𝐄 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍:
+cat /proc/cpuinfo # Display CPU information
+cat /proc/meminfo # Display memory information
+free -h # Display free and used memory ( -hfor human readable, -mfor MB, -gfor GB.)
+lspci -tv # Display PCI devices
+lsusb -tv # Display USB devices
+dmidecode # Display DMI/SMBIOS (hardware info) from the BIOS
+hdparm -i /dev/sda # Show info about disk sda
+hdparm -tT /dev/sda # Perform a read speed test on disk sda
+
+𝟐. 𝐌𝐀𝐍𝐈𝐏𝐔𝐋𝐀𝐓𝐈𝐍𝐆 𝐃𝐀𝐓𝐀 :
+awk # Pattern scanning and processing language
+perl # Data manipulation language
+cmp # Compare the contents of two files
+paste # Merge file data
+sed # Stream text editor
+cut # Cut out selected fields of each line of a file
+sort # Sort file data
+diff # Differential file comparator
+split # Split file into smaller files
+expand, unexpand # Expand tabs to spaces, and vice versa
+
+𝟑. 𝐏𝐑𝐎𝐂𝐄𝐒𝐒 𝐌𝐀𝐍𝐀𝐆𝐄𝐌𝐄𝐍𝐓:
+ps # Display your currently running processes
+ps -ef # Display all the currently running processes on the system. 
+ps -ef | grep processname # Display process information for processname
+top # Display and manage the top processes
+htop # Interactive process viewer (top alternative)
+kill pid # Kill process with process ID of pid
+killall processname # Kill all processes named processname
+program & # Start programin the background
+bg # Display stopped or background jobs
+fg # Brings the most recent background job to foreground
+fg n # Brings job nto the foreground
+
+
+𝟒. 𝐀𝐑𝐂𝐇𝐈𝐕𝐄𝐒 (𝐓𝐀𝐑 𝐅𝐈𝐋𝐄𝐒) :
+tar cf archive.tar directory # Create tar named archive .tar containing dir.
+tar xf archive.tar # Extract the contents from archive.tar. 
+tar czf -archive.tar.gz director # Create a gzip compressed tar file name archive.tar
+tar xzf archive.tar.gz # Extract a gzip compressed tar file.
+tar cjf archive.tar.bz2 directory # Create a tar file with bzip2 compression
+tar xjf archive.tar.bz2 # Extract a bzip2 compressed tar file. 
+
+𝟓. 𝐈𝐍𝐒𝐓𝐀𝐋𝐋𝐈𝐍𝐆 𝐏𝐀𝐂𝐊𝐀𝐆𝐄𝐒:
+yum search keyword # Search for a package by keyword.
+yum install package # Install package.
+yum info package # Display desc and summary information about package.
+rpm -i package.rpm # Install package from local file named package.rpm
+yum remove package # Remove/uninstall package
+tar zxvf sourcecode.tar.gz # Install software from source code.
+
+𝟔. 𝐒𝐄𝐀𝐑𝐂𝐇 :
+grep pattern file # Search for pattern in file
+grep -r pattern directory # Search recursively for patternin directory 
+locate name # Find files and directories by name
+find /home/john -name 'prefix*' # Find files in /home/john that start with "prefix". 
+find /home -size +100M # Find files larger than 100MB in /home
+
+
+ Port for ssh = 22
+      for tcp = 80
+	  for http = 80
+	  for https = 443
+	  for postgress = 5432
+	  for mysql = 3306
